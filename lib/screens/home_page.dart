@@ -2,6 +2,7 @@ import 'package:api_demo/model/apimodel.dart';
 import 'package:api_demo/services/api_service.dart';
 import 'package:api_demo/services/location_service.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,8 +13,23 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Api service = Api();
+  Location locationService = Location();
   Location location = Location();
   List<ApiModel> listData = [];
+  Position? rawposition;
+
+  void fetchLocation() async {
+    final position = await locationService.getlocation();
+    setState(() {
+      rawposition = position;
+      print(rawposition!.latitude);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content:
+              Text('${rawposition!.latitude}  ${rawposition?.longitude}')));
+    });
+
+    print(position.longitude);
+  }
 
   void fetchApiData() async {
     final List<ApiModel> apiData = await service.fetchimages();
@@ -25,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     fetchApiData();
-    location.getlocation();
+    fetchLocation();
     super.initState();
   }
 
