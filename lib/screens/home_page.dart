@@ -1,5 +1,6 @@
 import 'package:api_demo/model/apimodel.dart';
-import 'package:api_demo/screens/api_service.dart';
+import 'package:api_demo/services/api_service.dart';
+import 'package:api_demo/services/location_service.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,9 +12,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Api service = Api();
+  Location location = Location();
   List<ApiModel> listData = [];
 
-  fetchApiData() async {
+  void fetchApiData() async {
     final List<ApiModel> apiData = await service.fetchimages();
     setState(() {
       listData = apiData;
@@ -23,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     fetchApiData();
+    location.getlocation();
     super.initState();
   }
 

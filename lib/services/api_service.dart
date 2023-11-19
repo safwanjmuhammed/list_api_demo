@@ -15,7 +15,6 @@ class Api {
         for (var item in rawData) {
           data.add(ApiModel.fromJson(item));
         }
-        ;
         return data;
       } else {
         print(response.statusCode);
