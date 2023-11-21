@@ -1,4 +1,4 @@
-import 'package:api_demo/screens/home_page.dart';
+import 'package:api_demo/appteam_date_task.dart/age_calculator.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 142, 110, 196)),
         useMaterial3: false,
       ),
-      home: const HomePage(),
+      home: const AgeCalculator(),
     );
   }
 }
